@@ -1,16 +1,15 @@
 class Solution {
     fun plusOne(digits: IntArray): IntArray {
-        var numSt = \\
-        digits.forEach{d->
-            numSt += d
+        // Start from the last digit
+        for (i in digits.indices.reversed()) {
+            if (digits[i] < 9) {
+                digits[i]++
+                return digits
+            }
+            // Set current digit to 0 if it's 9
+            digits[i] = 0
         }
-        var num = numSt.toBigInteger()
-        num++
-        numSt = num.toString()
-        val result = IntArray(numSt.length)
-        for(i in 0 until result.size){
-            result[i] = numSt[i].toString().toInt()
-        }
-        return result
+        // If we are here, it means we need to add a new digit at the front
+        return IntArray(digits.size + 1).apply { this[0] = 1 }
     }
 }
